@@ -1,6 +1,7 @@
 import 'package:coffe_shop_app/datasourcestatic/static.dart';
 import 'package:coffe_shop_app/view/screens/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoarding extends StatefulWidget {
   const OnBoarding({super.key});
@@ -53,19 +54,27 @@ class _OnBoardingState extends State<OnBoarding> {
                         child: Text(onBoardingList[i].body!,textAlign: TextAlign.center,style:  TextStyle(height: 2,fontWeight: FontWeight.w700,fontSize: 20,color: Color(0xff8A451B)),)),
                   ],)),
             ),
+
             Expanded(flex: 1,
                 child: Column(
                   children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                     ...List.generate(onBoardingList.length, (index) => AnimatedContainer(
-                  margin: EdgeInsets.only(right: 5),
-                  duration:const Duration(milliseconds: 900),
-                  width: 6,height:6 ,
-                  decoration: BoxDecoration(color: Color(0xff8A451B),
-                      borderRadius: BorderRadius.circular(10)),
-                ))
-                  ],),
+                    SmoothPageIndicator(
+                        effect:  SlideEffect(
+                            spacing:  8.0,
+                            radius:  40.0,
+                            dotWidth:  15.0,
+                            dotHeight:  15.0,
+                            paintStyle:  PaintingStyle.stroke,
+                            strokeWidth:  1.5,
+                            dotColor:  Colors.grey,
+                            activeDotColor:  Color(0xff8A451B)
+                        ),
+                        controller: _controller,  // PageController
+                        count:  onBoardingList.length,
+                        onDotClicked: (index){
+
+                        }
+                    ),
                     Spacer(),
               Container(
                 margin: EdgeInsets.only(bottom: 40),
